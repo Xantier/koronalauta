@@ -49,7 +49,7 @@ class Accordions extends React.Component {
                             {Object.entries(confirmed).map(([district, arr]) => (
                                 <div key={district} style={{ margin: 5 }}>
                                     <span style={{ fontWeight: 'bold' }}>{district}</span>
-                                    <div>Tapaukset: {JSON.stringify(arr.length)}</div>
+                                    <div>Tartunnat: {JSON.stringify(arr.length)}</div>
                                 </div>))
                             }
                         </div>
@@ -60,7 +60,7 @@ class Accordions extends React.Component {
                             {Object.entries(dateArr).map(([date, arr]) => (
                                 <div key={date + arr.length} style={{ margin: 5 }}>
                                     <span style={{ fontWeight: 'bold' }}>{date}</span>
-                                    <div>Tapaukset: {JSON.stringify(arr.length)}</div>
+                                    <div>Tartunnat: {JSON.stringify(arr.length)}</div>
                                 </div>))
                             }
                         </div>
