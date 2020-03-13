@@ -10,6 +10,7 @@ const headers = (showInfectionInfo) => [
     {
         name: 'Potilasnumero',
         selector: 'id',
+        sortable: true
     }, {
         name: 'Päivämäärä',
         selector: 'formattedDate',
