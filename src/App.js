@@ -72,6 +72,17 @@ function App() {
     });
     return (
         <div className="App">
+            <header>
+                <div>Varmistetut
+                    <div className="numberCircle">{state.confirmed.length}</div>
+                </div>
+                <div>Parantuneet
+                <div className="numberCircle">{state.recovered.length}</div>
+                </div>
+                <div>Kuolleet
+                <div className="numberCircle">{state.deaths.length}</div>
+                </div>
+            </header>
             <Table
                 pending={!state.loaded}
                 title={'Varmistetut'}
@@ -80,11 +91,13 @@ function App() {
             <Table
                 pending={!state.loaded}
                 title={'Parantuneet'}
-                data={state.recovered.map(format)} columns={headers(false)}/>
+                data={state.recovered.map(format)}
+                columns={headers(false)}/>
             <Table
                 pending={!state.loaded}
                 title={'Kuolleet'}
-                data={state.deaths.map(format)} columns={headers(false)}/>
+                data={state.deaths.map(format)}
+                columns={headers(false)}/>
         </div>
     );
 }
