@@ -13,29 +13,24 @@ const customSort = (rows, field, direction) => {
         }
         return row[field];
     };
-
     return orderBy(rows, handleField, direction);
 };
 
 
-const Table = ({ title, data, columns, pending }) => {
+const Table = ({ title, data, columns, pending }) =>
+    <DataTable
+        highlightOnHover={true}
+        striped={true}
+        title={title}
+        defaultSortField="id"
+        defaultSortAsc={false}
+        columns={columns}
+        data={data}
+        progressPending={pending}
+        pagination
+        dense={isMobile}
+        sortFunction={customSort}
+    />;
 
-    const handleSort = (column, sortDirection) => console.log(column.selector, sortDirection);
-    return (
-        <DataTable
-            highlightOnHover={true}
-            striped={true}
-            title={title}
-            defaultSortField="id"
-            defaultSortAsc={false}
-            columns={columns}
-            data={data}
-            progressPending={pending}
-            pagination
-            dense={isMobile}
-            sortFunction={customSort}
-        />
-    );
-};
 export default Table;
 

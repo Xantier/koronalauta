@@ -4,6 +4,8 @@ import moment from 'moment';
 import isoCodes from './isoCodes.json';
 import './App.css';
 import Table from './Table';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 moment.locale('FI');
 const headers = (showInfectionInfo) => [
@@ -15,10 +17,12 @@ const headers = (showInfectionInfo) => [
         name: 'Päivämäärä',
         selector: 'formattedDate',
         sortable: true,
+        wrap: true,
     }, {
         name: 'Sairaanhoitoalue',
         selector: 'healthCareDistrict',
         sortable: true,
+        wrap: true,
     },
     ...showInfectionInfo ? [
         {
@@ -29,7 +33,6 @@ const headers = (showInfectionInfo) => [
             name: 'Tartuttaja',
             selector: 'source',
             sortable: true,
-            hide: 'sm',
         },
     ] : []
 ];
@@ -66,7 +69,7 @@ function App() {
     }
 
     const format = it => ({
-        formattedDate: moment(it.date).format('YYYY-MM-DD HH:mm:ss'),
+        formattedDate: moment(it.date).format('YYYY-MM-DD HH:mm'),
         location: it.infectionSourceCountry != null ? isoCodes[it.infectionSourceCountry] : 'Tuntematon',
         source: getSource(it),
         ...it,
@@ -78,27 +81,44 @@ function App() {
                     <div className="numberCircle">{state.confirmed.length}</div>
                 </div>
                 <div>Parantuneet
-                <div className="numberCircle">{state.recovered.length}</div>
+                    <div className="numberCircle">{state.recovered.length}</div>
                 </div>
                 <div>Kuolleet
-                <div className="numberCircle">{state.deaths.length}</div>
+                    <div className="numberCircle">{state.deaths.length}</div>
                 </div>
             </header>
-            <Table
-                pending={!state.loaded}
-                title={'Varmistetut'}
-                data={state.confirmed.map(format)}
-                columns={headers(true)}/>
-            <Table
-                pending={!state.loaded}
-                title={'Parantuneet'}
-                data={state.recovered.map(format)}
-                columns={headers(false)}/>
-            <Table
-                pending={!state.loaded}
-                title={'Kuolleet'}
-                data={state.deaths.map(format)}
-                columns={headers(false)}/>
+
+            <Tabs>
+                <TabList>
+                    <Tab>Varmistetut</Tab>
+                    <Tab>Parantuneet</Tab>
+                    <Tab>Kuolleet</Tab>
+                </TabList>
+
+                <TabPanel>
+                    <Table
+                        pending={!state.loaded}
+                        title={'Varmistetut'}
+                        data={state.confirmed.map(format)}
+                        columns={headers(true)}/>
+                </TabPanel>
+                <TabPanel>
+                    <Table
+                        pending={!state.loaded}
+                        title={'Parantuneet'}
+                        data={state.recovered.map(format)}
+                        columns={headers(false)}/>
+                </TabPanel>
+                <TabPanel>
+                    <Table
+                        pending={!state.loaded}
+                        title={'Kuolleet'}
+                        data={state.deaths.map(format)}
+                        columns={headers(false)}/>
+                </TabPanel>
+            </Tabs>
+
+
         </div>
     );
 }
