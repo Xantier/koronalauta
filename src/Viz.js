@@ -4,6 +4,7 @@ import '../node_modules/react-vis/dist/style.css';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
+import {isMobile} from 'react-device-detect';
 
 const formattedDate = (it) => moment(it.date).format('MM/DD/YYYY'); // Murica
 const mmdd = (it) => moment(it).format('DD-MM'); // Murica
@@ -26,7 +27,7 @@ const Chart = ({ data }) => {
     return (
         <XYPlot
             xType="time"
-            width={800}
+            width={isMobile ? 400 : 800}
             height={500}>
             <HorizontalGridLines/>
 
