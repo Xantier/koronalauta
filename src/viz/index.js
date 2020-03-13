@@ -7,10 +7,12 @@ import Pie from './Pie';
 const Chart = ({ data }) => {
     return (
         <div>
-            <div style={{ height: '50vh' }}>
+            <div style={{ height: '50vh', marginBottom: 50 }}>
+                <h1>Tapauksien lukumäärä</h1>
                 <Line data={data}/>
             </div>
             <div style={{ height: '50vh' }}>
+                <h1>Tartuntapaikka</h1>
                 <Pie data={data}/>
             </div>
         </div>
