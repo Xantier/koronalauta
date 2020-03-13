@@ -35,6 +35,7 @@ const headers = (showInfectionInfo) => [
 
 function App() {
     const [state, setState] = useState({
+        loaded: false,
         confirmed: [],
         deaths: [],
         recovered: []
@@ -44,8 +45,7 @@ function App() {
         const doFetch = async () => {
             oboe('https://w3qa5ydb4l.execute-api.eu-west-1.amazonaws.com/prod/finnishCoronaData')
                 .done(function (cases) {
-                    console.log(cases);
-                    setState(cases);
+                    setState({ loaded: true, ...cases });
                 })
                 .fail(function () {
                     console.error('Couldn\'t get data :(');
@@ -56,7 +56,7 @@ function App() {
 
 
     function getSource(it) {
-        if(it.infectionSource === 'related to earlier'){
+        if (it.infectionSource === 'related to earlier') {
             return 'Liittyy aiempaan tapaukseen';
         }
         return it.infectionSource !== 'unknown'
@@ -66,22 +66,26 @@ function App() {
 
     const format = it => ({
         formattedDate: moment(it.date).format('YYYY-MM-DD HH:mm:ss'),
-        location: it.infectionSourceCountry != null ? isoCodes[it.infectionSourceCountry]: 'Tuntematon',
+        location: it.infectionSourceCountry != null ? isoCodes[it.infectionSourceCountry] : 'Tuntematon',
         source: getSource(it),
         ...it,
     });
     return (
         <div className="App">
-            <Table
-                title={'Varmistetut'}
-                data={state.confirmed.map(format)}
-                columns={headers(true)}/>
-            <Table
-                title={'Kuolleet'}
-                data={state.deaths.map(format)} columns={headers(false)}/>
-            <Table
-                title={'Parantuneet'}
-                data={state.recovered.map(format)} columns={headers(false)}/>
+            {state.loaded ? (
+                    <div>
+                        <Table
+                            title={'Varmistetut'}
+                            data={state.confirmed.map(format)}
+                            columns={headers(true)}/>
+                        <Table
+                            title={'Kuolleet'}
+                            data={state.deaths.map(format)} columns={headers(false)}/>
+                        <Table
+                            title={'Parantuneet'}
+                            data={state.recovered.map(format)} columns={headers(false)}/>
+                    </div>)
+                : 'Haetaan Tietoja'}
         </div>
     );
 }
