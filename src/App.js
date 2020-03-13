@@ -7,6 +7,7 @@ import 'react-tabs/style/react-tabs.css';
 import isoCodes from './isoCodes.json';
 import './App.css';
 import Table from './Table';
+import Accordions from './Accordions';
 import Viz from './viz';
 import Map from './viz/Map';
 
@@ -90,7 +91,7 @@ function App() {
                     <div className="numberCircle">{state.deaths.length}</div>
                 </div>
             </header>
-
+            <Accordions {...state} />
             <Tabs>
                 <TabList>
                     <Tab>Varmistetut</Tab>
