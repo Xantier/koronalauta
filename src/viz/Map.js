@@ -194,8 +194,7 @@ class App extends React.Component {
                             onMouseEnter={area => this.enterArea(area, dataArr)}
                             onMouseLeave={area => this.leaveArea(area)}
                             onImageClick={evt => this.clickedOutside(evt)}
-                            lineWidth={4}
-                            strokeColor={"white"}
+                            active={false}
                         />
                         {this.state.hoveredArea && (
                             <span
