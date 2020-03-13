@@ -9,7 +9,7 @@ const Chart = ({ data = [] }) => {
     return (
         <div>
             <div style={{ height: '50vh', marginBottom: 50 }}>
-                <h1>Tapauksien lukumäärä</h1>
+                <h1>Tartuntojen lukumäärä</h1>
                 <Line data={data}/>
             </div>
             <div style={{ height: '50vh' }}>
