@@ -73,26 +73,13 @@ function App() {
     });
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-            </header>
-            <h1>
-                Varmistetut
-            </h1>
             <Table
                 title={'Varmistetut'}
                 data={state.confirmed.map(format)}
                 columns={headers(true)}/>
-
-            <h1>
-                Kuolleet
-            </h1>
             <Table
                 title={'Kuolleet'}
                 data={state.deaths.map(format)} columns={headers(false)}/>
-            <h1>
-                Parantuneet
-            </h1>
             <Table
                 title={'Parantuneet'}
                 data={state.recovered.map(format)} columns={headers(false)}/>
