@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import oboe from 'oboe';
 import moment from 'moment';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 import isoCodes from './isoCodes.json';
 import './App.css';
 import Table from './Table';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import Viz from './Viz';
 
 moment.locale('FI');
 const headers = (showInfectionInfo) => [
@@ -93,6 +95,7 @@ function App() {
                     <Tab>Varmistetut</Tab>
                     <Tab>Parantuneet</Tab>
                     <Tab>Kuolleet</Tab>
+                    <Tab>Graafeja</Tab>
                 </TabList>
 
                 <TabPanel>
@@ -115,6 +118,9 @@ function App() {
                         title={'Kuolleet'}
                         data={state.deaths.map(format)}
                         columns={headers(false)}/>
+                </TabPanel>
+                <TabPanel>
+                    <Viz data={state.confirmed}/>
                 </TabPanel>
             </Tabs>
 
