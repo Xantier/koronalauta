@@ -81,7 +81,7 @@ function App() {
     return (
         <div className="App">
             <header>
-                <div>Varmistetut
+                <div>Tartunnat
                     <div className="numberCircle">{state.confirmed.length}</div>
                 </div>
                 <div>Parantuneet
@@ -94,7 +94,7 @@ function App() {
             <Accordions {...state} />
             <Tabs>
                 <TabList>
-                    <Tab>Varmistetut</Tab>
+                    <Tab>Tartunnat</Tab>
                     <Tab>Kartta</Tab>
                     <Tab>Parantuneet</Tab>
                     {/*<Tab>Kuolleet</Tab>*/}
@@ -104,7 +104,7 @@ function App() {
                 <TabPanel>
                     <Table
                         pending={!state.loaded}
-                        title={'Varmistetut'}
+                        title={'Tartunnat'}
                         data={state.confirmed.map(tableFormat)}
                         columns={headers(true)}/>
                 </TabPanel>
