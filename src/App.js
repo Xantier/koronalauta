@@ -8,6 +8,7 @@ import isoCodes from './isoCodes.json';
 import './App.css';
 import Table from './Table';
 import Viz from './viz';
+import Map from './viz/Map';
 
 moment.locale('FI');
 const headers = (showInfectionInfo) => [
@@ -70,7 +71,7 @@ function App() {
             : 'Tuntematon';
     }
 
-    const format = it => ({
+    const tableFormat = it => ({
         formattedDate: moment(it.date).format('YYYY-MM-DD HH:mm'),
         location: it.infectionSourceCountry != null ? isoCodes[it.infectionSourceCountry] : 'Tuntematon',
         source: getSource(it),
@@ -93,8 +94,9 @@ function App() {
             <Tabs>
                 <TabList>
                     <Tab>Varmistetut</Tab>
+                    <Tab>Kartta</Tab>
                     <Tab>Parantuneet</Tab>
-                    <Tab>Kuolleet</Tab>
+                    {/*<Tab>Kuolleet</Tab>*/}
                     <Tab>Graafeja</Tab>
                 </TabList>
 
@@ -102,23 +104,26 @@ function App() {
                     <Table
                         pending={!state.loaded}
                         title={'Varmistetut'}
-                        data={state.confirmed.map(format)}
+                        data={state.confirmed.map(tableFormat)}
                         columns={headers(true)}/>
+                </TabPanel>
+                <TabPanel>
+                    <Map data={state.confirmed}/>
                 </TabPanel>
                 <TabPanel>
                     <Table
                         pending={!state.loaded}
                         title={'Parantuneet'}
-                        data={state.recovered.map(format)}
+                        data={state.recovered.map(tableFormat)}
                         columns={headers(false)}/>
                 </TabPanel>
-                <TabPanel>
+{/*                <TabPanel>
                     <Table
                         pending={!state.loaded}
                         title={'Kuolleet'}
-                        data={state.deaths.map(format)}
+                        data={state.deaths.map(tableFormat)}
                         columns={headers(false)}/>
-                </TabPanel>
+                </TabPanel>*/}
                 <TabPanel>
                     <Viz data={state.confirmed}/>
                 </TabPanel>
