@@ -16,7 +16,7 @@ const Chart = ({ data = [] }) => {
                 <h1>Tartuntapaikka</h1>
                 <Pie data={data}/>
             </div>
-            <div style={{ height: '50vh' }}>
+
 
 
 
