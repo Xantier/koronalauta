@@ -18,7 +18,7 @@ const Chart = ({ data = [] }) => {
             </div>
             <div style={{ height: '50vh' }}>
                 <h1>Kartta</h1>
-                <Map data={data}/>
+
 
         </div>
     );
