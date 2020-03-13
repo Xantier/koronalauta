@@ -10,7 +10,6 @@ const headers = (showInfectionInfo) => [
     {
         name: 'Potilasnumero',
         selector: 'id',
-        sortable: true,
     }, {
         name: 'Päivämäärä',
         selector: 'formattedDate',
@@ -29,6 +28,7 @@ const headers = (showInfectionInfo) => [
             name: 'Tartuttaja',
             selector: 'source',
             sortable: true,
+            hide: 'sm',
         },
     ] : []
 ];
@@ -72,20 +72,19 @@ function App() {
     });
     return (
         <div className="App">
-            {state.loaded ? (
-                    <div>
-                        <Table
-                            title={'Varmistetut'}
-                            data={state.confirmed.map(format)}
-                            columns={headers(true)}/>
-                        <Table
-                            title={'Kuolleet'}
-                            data={state.deaths.map(format)} columns={headers(false)}/>
-                        <Table
-                            title={'Parantuneet'}
-                            data={state.recovered.map(format)} columns={headers(false)}/>
-                    </div>)
-                : 'Haetaan Tietoja'}
+            <Table
+                pending={!state.loaded}
+                title={'Varmistetut'}
+                data={state.confirmed.map(format)}
+                columns={headers(true)}/>
+            <Table
+                pending={!state.loaded}
+                title={'Parantuneet'}
+                data={state.recovered.map(format)} columns={headers(false)}/>
+            <Table
+                pending={!state.loaded}
+                title={'Kuolleet'}
+                data={state.deaths.map(format)} columns={headers(false)}/>
         </div>
     );
 }
