@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import oboe from 'oboe';
 import moment from 'moment';
 import isoCodes from './isoCodes.json';
-import logo from './logo.svg';
 import './App.css';
 import Table from './Table';
 
