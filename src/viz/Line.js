@@ -1,18 +1,18 @@
 import React from 'react';
-import { XYPlot, XAxis, YAxis, VerticalGridLines, HorizontalGridLines, LineSeries } from 'react-vis';
-import '../node_modules/react-vis/dist/style.css';
+import { HorizontalGridLines, LineSeries, makeVisFlexible, VerticalGridLines, XAxis, XYPlot, YAxis } from 'react-vis';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
-import {isMobile} from 'react-device-detect';
+
 
 const formattedDate = (it) => moment(it.date).format('MM/DD/YYYY'); // Murica
-const mmdd = (it) => moment(it).format('DD-MM'); // Murica
+const mmdd = (it) => moment(it).format('DD-MM');
 
-const Chart = ({ data }) => {
-    const orderedData = orderBy(data, it => moment(it.date).format('YYYYMMDD'), ['asc']);
-    const dataArr = Object.entries(
-        groupBy(orderedData, it => formattedDate(it)))
+const FlexXYPlot = makeVisFlexible(XYPlot);
+
+const Line = ({ data }) => {
+    const orderedbyDateData = orderBy(data, it => moment(it.date).format('YYYYMMDD'), ['asc']);
+    const dataArr = Object.entries(groupBy(orderedbyDateData, it => formattedDate(it)))
         .reduce((acc, [date, data]) => {
             acc.push({
                 x: new Date(date),
@@ -20,15 +20,10 @@ const Chart = ({ data }) => {
             });
             return acc;
         }, []);
-
-
-
-    console.log(dataArr)
     return (
-        <XYPlot
-            xType="time"
-            width={isMobile ? 400 : 800}
-            height={500}>
+        <FlexXYPlot
+            margin={{ bottom: 50 }}
+            xType="time">
             <HorizontalGridLines/>
 
             <VerticalGridLines/>
@@ -38,8 +33,7 @@ const Chart = ({ data }) => {
             />
             <YAxis title="Todetut tapaukset"/>
             <LineSeries color={'red'} data={dataArr}/>
-        </XYPlot>
-
+        </FlexXYPlot>
     );
 };
-export default Chart;
+export default Line;

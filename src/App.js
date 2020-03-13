@@ -7,7 +7,7 @@ import 'react-tabs/style/react-tabs.css';
 import isoCodes from './isoCodes.json';
 import './App.css';
 import Table from './Table';
-import Viz from './Viz';
+import Viz from './viz';
 
 moment.locale('FI');
 const headers = (showInfectionInfo) => [
