@@ -11,6 +11,10 @@ const colors = [
     '#AADEA7',
     '#64C2A6',
     '#2D87BB',
+    '#3549bb',
+    '#8668bb',
+    '#b88abb',
+    '#bbbbb2',
 ];
 
 const FlexRadialChart = makeVisFlexible(RadialChart);
