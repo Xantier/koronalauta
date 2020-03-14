@@ -2,7 +2,6 @@ import * as React from 'react';
 import './Accordion.css';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
-import mergeWith from 'lodash/mergeWith';
 import moment from 'moment';
 
 class Accordion extends React.Component {

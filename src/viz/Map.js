@@ -172,7 +172,7 @@ class App extends React.Component {
 
     getHoverText(dataArr) {
         const amount = `${dataArr[this.state.hoveredArea.name] ? dataArr[this.state.hoveredArea.name].length : 0}`;
-        let thing = amount == 1 ? 'tapaus' : `tapausta`;
+        const thing = amount == 1 ? 'tapaus' : `tapausta`;
         return <>
             {this.state.hoveredArea
                 ? `${this.state.hoveredArea.name} - ${amount} ${thing}`
