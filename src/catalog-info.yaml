@@ -1,0 +1,11 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: koronalauta
+  annotations:
+    github.com/project-slug: Xantier/koronalauta
+spec:
+  type: other
+  lifecycle: unknown
+  owner: unknown
